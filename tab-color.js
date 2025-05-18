@@ -2,8 +2,8 @@
  * Runs automatically when the sheet is edited
  * Changes tab color based on these conditions:
  * - Only applies to sheets with 👽 emoji in the tab name
- * - Green: Less than or equal to 5 rows with empty cells in F,G,H,I
- * - Orange: More than 5 rows with empty cells in F,G,H,I
+ * - Dark green 1: Less than or equal to 5 rows with empty cells in F,G,H,I
+ * - Dark orange 1: More than 5 rows with empty cells in F,G,H,I
  */
 function onEdit(e) {
     // Get the edited sheet
@@ -19,8 +19,8 @@ function onEdit(e) {
     var dataRange = sheet.getDataRange()
     var values = dataRange.getValues()
 
-    // Default color is green
-    var tabColor = '#0f9d58' // Green
+    // Default color is dark green 1
+    var tabColor = '#0f9d58' // Google Sheets Dark green 1
 
     // Counter for rows with empty cells
     var emptyRowCount = 0
@@ -35,7 +35,7 @@ function onEdit(e) {
         // Check if row has data in both columns C and D (indices 2 and 3)
         // Ignore column A as it may just contain sequential numbers
         if (row[2] !== '' && row[3] !== '') {
-            // Row has meaningful data in C and D, now check if F, G, H, I are empty
+            // Row has meaningful data in C and D, now check if F, G, H, I are ALL empty
             if (
                 row[5] === '' &&
                 row[6] === '' &&
@@ -46,7 +46,7 @@ function onEdit(e) {
 
                 // If we've found more than 5 rows with empty cells, change color and exit loop
                 if (emptyRowCount > 5) {
-                    tabColor = '#e67c73' // Orange
+                    tabColor = '#e67c73' // Google Sheets Dark orange 1
                     break
                 }
             }
